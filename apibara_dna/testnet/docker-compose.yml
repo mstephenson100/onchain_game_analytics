@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  testnet:
+    image: eqlabs/pathfinder:latest
+    restart: unless-stopped
+    environment:
+      - RUST_LOG=info
+    env_file:
+      - pathfinder-testnet-var.env
+    volumes:
+     - testnet:/usr/share/pathfinder/data
+    ports:
+      - 8545:9545
+
+  apibara:
+    image: quay.io/apibara/starknet:8a5ff0593bc9eb561ade52535eaef489570eef08
+    ports:
+    - 7171:7171
+    depends_on:
+    - testnet
+    restart: always
+    command:
+      - start
+      - --data
+      - "/data/dna"
+      - --rpc
+      - "http://testnet:9545/rpc/v0.2"
+    environment:
+    - OTEL_SDK_DISABLED=true
+    volumes:
+      - apibara-data:/data/dna
+    links:
+    - testnet
+
+volumes:
+  testnet:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/bios/apibara_dna/testnet/pathfinder_data
+  apibara-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/bios/apibara_dna/testnet/dna_data

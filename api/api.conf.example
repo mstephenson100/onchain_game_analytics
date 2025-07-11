@@ -1,0 +1,15 @@
+[credentials]
+db_user = bios
+db_password = 
+db = bios_sepolia
+
+[authentication]
+db_user = bios
+db_password = 
+db = sepolia_user_authorization
+jwt_secret_key = 
+
+[blockchain]
+network = sepolia
+chain_id = 0x534e5f5345504f4c4941
+pathfinder_url = 
