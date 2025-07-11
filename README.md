@@ -17,4 +17,4 @@ Indexer code is available in the indexer directory
 ## API
 A Flask API server was built to return data to a web based dashboard. The API server included a method of validating the web user's wallet and providing analytics specific to that wallet.
 
-The API code is available in the api directory.
+The API code is available in the api directory. The methods described in README.md are not a full list.
